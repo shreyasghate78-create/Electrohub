@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ElectroHub - Electronics Learning</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+header {
+    background: #0f172a;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 32px;
+    color: #38bdf8;
+}
+
+header p {
+    margin-top: 10px;
+}
+
+nav {
+    background: #1e293b;
+    padding: 14px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 12px;
+    font-weight: bold;
+}
+
+.hero {
+    text-align: center;
+    padding: 35px 15px;
+    background: #dbeafe;
+}
+
+.hero h2 {
+    font-size: 27px;
+    margin-bottom: 12px;
+}
+
+.search-box {
+    margin: 22px auto;
+    max-width: 500px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #94a3b8;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.categories {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.categories button {
+    padding: 10px 16px;
+    margin: 5px;
+    border: none;
+    background: #0284c7;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.categories button:hover,
+.categories button.active {
+    background: #0f172a;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card .symbol {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    color: #0284c7;
+    margin-bottom: 12px;
+}
+
+.card p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.card strong {
+    color: #0f172a;
+}
+
+.card button {
+    background: #0284c7;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.details {
+    display: none;
+    background: #eff6ff;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.no-results {
+    display: none;
+    text-align: center;
+    padding: 25px;
+}
+
+footer {
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    margin-top: 40px;
+}
+
+@media(max-width:600px) {
+    header h1 {
+        font-size: 25px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 7px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>⚡ ElectroHub</h1>
+    <p>Your Electronic Components Learning Platform</p>
+    <p>Explore • Learn • Experiment • Innovate</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#components">Components</a>
+    <a href="#about">About</a>
+</nav>
+
+<section class="hero" id="home">
+    <h2>Explore the World of Electronics!</h2>
+    <p>Learn about electronic components, their working and real-world applications.</p>
+
+    <div class="search-box">
+        <input type="text" id="search"
+        placeholder="Search components... e.g. Arduino, Resistor"
+        onkeyup="searchComponents()">
+    </div>
+</section>
+
+<section class="categories">
+    <h3>Choose a Category</h3>
+    <button class="active" onclick="filterComponents('all',this)">All</button>
+    <button onclick="filterComponents('passive',this)">Passive</button>
+    <button onclick="filterComponents('active',this)">Active</button>
+    <button onclick="filterComponents('boards',this)">Boards</button>
+    <button onclick="filterComponents('sensors',this)">Sensors</button>
+</section>
+
+<section class="container" id="components">
+    <h2>Electronic Components Library</h2>
+
+    <div class="component-grid" id="componentGrid">
+
+        <div class="card" data-category="passive">
+            <div class="symbol">〰️</div>
+            <h3>Resistor</h3>
+            <p><strong>Type:</strong> Passive Component</p>
+            <p><strong>Function:</strong> Limits the flow of electric current in a circuit.</p>
+            <p><strong>Unit:</strong> Ohm (Ω)</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                Resistors are used to control current and divide voltage.
+                <br><strong>Applications:</strong> LED circuits, voltage dividers and pull-up circuits.
+                <br><strong>Common values:</strong> 220Ω, 330Ω, 1kΩ, 10kΩ.
+            </div>
+        </div>
+
+        <div class="card" data-category="passive">
+            <div class="symbol">🔋</div>
+            <h3>Capacitor</h3>
+            <p><strong>Type:</strong> Passive Component</p>
+            <p><strong>Function:</strong> Stores electrical energy in an electric field.</p>
+            <p><strong>Unit:</strong> Farad (F)</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                Capacitors store and release electrical charge.
+                <br><strong>Applications:</strong> Filtering, coupling, timing and power supply circuits.
+                <br><strong>Types:</strong> Ceramic, electrolytic and film capacitors.
+            </div>
+        </div>
+
+        <div class="card" data-category="active">
+            <div class="symbol">💡</div>
+            <h3>Diode</h3>
+            <p><strong>Type:</strong> Semiconductor Component</p>
+            <p><strong>Function:</strong> Allows current to flow mainly in one direction.</p>
+            <p><strong>Example:</strong> 1N4007</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                A diode conducts when forward biased and blocks current when reverse biased, within its ratings.
+                <br><strong>Applications:</strong> Rectifiers, reverse-polarity protection and signal circuits.
+            </div>
+        </div>
+
+        <div class="card" data-category="active">
+            <div class="symbol">🔌</div>
+            <h3>Transistor</h3>
+            <p><strong>Type:</strong> Active Component</p>
+            <p><strong>Function:</strong> Works as an electronic switch or amplifier.</p>
+            <p><strong>Example:</strong> BC547, 2N2222</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                Transistors control current using an input signal.
+                <br><strong>Applications:</strong> Amplifiers, switching circuits and digital electronics.
+                <br><strong>Types:</strong> BJT, MOSFET and JFET.
+            </div>
+        </div>
+
+        <div class="card" data-category="active">
+            <div class="symbol">🔲</div>
+            <h3>Integrated Circuit (IC)</h3>
+            <p><strong>Type:</strong> Semiconductor Component</p>
+            <p><strong>Function:</strong> Contains multiple electronic components in a single chip.</p>
+            <p><strong>Example:</strong> 555 Timer IC</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                ICs combine transistors, resistors and other elements.
+                <br><strong>Applications:</strong> Computers, amplifiers, timers and communication systems.
+            </div>
+        </div>
+
+        <div class="card" data-category="boards">
+            <div class="symbol">🟩</div>
+            <h3>Arduino UNO</h3>
+            <p><strong>Type:</strong> Microcontroller Board</p>
+            <p><strong>Function:</strong> Controls electronic devices using programmed instructions.</p>
+            <p><strong>Controller:</strong> ATmega328P (classic UNO R3)</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                Arduino is an open-source electronics prototyping platform.
+                <br><strong>Applications:</strong> Robotics, automation, smart home and IoT projects.
+                <br><strong>Programming:</strong> Arduino IDE using C/C++.
+            </div>
+        </div>
+
+        <div class="card" data-category="boards">
+            <div class="symbol">🍓</div>
+            <h3>Raspberry Pi</h3>
+            <p><strong>Type:</strong> Single Board Computer</p>
+            <p><strong>Function:</strong> A compact computer capable of running an operating system.</p>
+            <p><strong>Programming:</strong> Python, C and more.</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                Raspberry Pi is a small computer used for software and hardware projects.
+                <br><strong>Applications:</strong> AI, robotics, IoT, computer vision and automation.
+                <br>It provides GPIO pins for connecting electronic components.
+            </div>
+        </div>
+
+        <div class="card" data-category="boards">
+            <div class="symbol">📟</div>
+            <h3>ESP32</h3>
+            <p><strong>Type:</strong> Microcontroller Board</p>
+            <p><strong>Function:</strong> Provides processing, Wi-Fi and Bluetooth connectivity.</p>
+            <p><strong>Programming:</strong> Arduino IDE, ESP-IDF.</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                ESP32 is widely used in connected electronics projects.
+                <br><strong>Applications:</strong> IoT, wireless monitoring and smart devices.
+                <br>Features vary by ESP32 model.
+            </div>
+        </div>
+
+        <div class="card" data-category="sensors">
+            <div class="symbol">🌡️</div>
+            <h3>Temperature Sensor</h3>
+            <p><strong>Type:</strong> Sensor</p>
+            <p><strong>Function:</strong> Measures temperature.</p>
+            <p><strong>Example:</strong> LM35</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                Temperature sensors convert temperature into an electrical signal.
+                <br><strong>Applications:</strong> Weather stations, industrial monitoring and automatic cooling systems.
+            </div>
+        </div>
+
+        <div class="card" data-category="sensors">
+            <div class="symbol">📡</div>
+            <h3>Ultrasonic Sensor</h3>
+            <p><strong>Type:</strong> Distance Sensor</p>
+            <p><strong>Function:</strong> Measures distance using ultrasonic sound waves.</p>
+            <p><strong>Example:</strong> HC-SR04</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                It calculates distance using the time taken by an ultrasonic pulse to return.
+                <br><strong>Applications:</strong> Obstacle detection, robotics and parking systems.
+            </div>
+        </div>
+
+        <div class="card" data-category="sensors">
+            <div class="symbol">💡</div>
+            <h3>LDR Sensor</h3>
+            <p><strong>Type:</strong> Light Sensor</p>
+            <p><strong>Function:</strong> Changes resistance according to light intensity.</p>
+            <p><strong>Full Form:</strong> Light Dependent Resistor</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                LDR resistance generally decreases when light intensity increases.
+                <br><strong>Applications:</strong> Automatic street lights, light detection and brightness control.
+            </div>
+        </div>
+
+        <div class="card" data-category="passive">
+            <div class="symbol">🌀</div>
+            <h3>Inductor</h3>
+            <p><strong>Type:</strong> Passive Component</p>
+            <p><strong>Function:</strong> Stores energy in a magnetic field.</p>
+            <p><strong>Unit:</strong> Henry (H)</p>
+            <button onclick="toggleDetails(this)">Learn More</button>
+            <div class="details">
+                An inductor opposes changes in current through it.
+                <br><strong>Applications:</strong> Filters, DC-DC converters and power supplies.
+            </div>
+        </div>
+
+    </div>
+
+    <p class="no-results" id="noResults">
+        No components found. Try another search!
+    </p>
+</section>
+
+<section class="container" id="about">
+    <h2>About ElectroHub</h2>
+    <p style="text-align:center;line-height:1.8;">
+        ElectroHub is a student-friendly electronics learning platform
+        designed to help engineering students understand electronic
+        components, their working principles and their practical applications.
+        It is useful for ECE, EEE, robotics and electronics enthusiasts.
+    </p>
+</section>
+
+<footer>
+    <h3>⚡ ElectroHub</h3>
+    <p>Learn Electronics. Build Ideas. Create the Future.</p>
+    <p>Designed for Engineering Students</p>
+    <p>© 2026 ElectroHub</p>
+</footer>
+
+<script>
+
+function toggleDetails(button) {
+    let details = button.nextElementSibling;
+
+    if (details.style.display === "block") {
+        details.style.display = "none";
+        button.innerText = "Learn More";
+    } else {
+        details.style.display = "block";
+        button.innerText = "Show Less";
+    }
+}
+
+function searchComponents() {
+    let input = document.getElementById("search").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+    let count = 0;
+
+    cards.forEach(card => {
+        let text = card.innerText.toLowerCase();
+
+        if (text.includes(input)) {
+            card.style.display = "block";
+            count++;
+        } else {
+            card.style.display = "none";
+        }
+    });
+
+    document.getElementById("noResults").style.display =
+        count === 0 ? "block" : "none";
+
+    document.querySelectorAll(".categories button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+}
+
+function filterComponents(category, button) {
+    let cards = document.querySelectorAll(".card");
+    let count = 0;
+
+    cards.forEach(card => {
+        if (category === "all" ||
+            card.dataset.category === category) {
+            card.style.display = "block";
+            count++;
+        } else {
+            card.style.display = "none";
+        }
+    });
+
+    document.getElementById("search").value = "";
+    document.getElementById("noResults").style.display =
+        count === 0 ? "block" : "none";
+
+    document.querySelectorAll(".categories button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+}
+
+</script>
+
+</body>
+</html>
